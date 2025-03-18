@@ -1,8 +1,8 @@
 #!/bin/bash
 # Program:
-#   This script accepts project_name, cluster_name, zone, and other commands.
+#   This script only accepts the following parameters.
 # History:
-# 2015/07/17    VBird    First release
+# 2015/07/17	VBird	First release
 
 #!/bin/bash
 
@@ -28,7 +28,7 @@ profiles_message=$FONT_BOLD"Usage ${0} [project_name] [cluster_name] [zone] [lis
 check_or_create_configuration() {
     config_name=$1
     existing_config=$(gcloud config configurations list --format="value(name)" | grep -w $config_name)
-
+    
     if [ -z "$existing_config" ]; then
         echo "Configuration $config_name does not exist. Creating..."
         gcloud config configurations create $config_name
@@ -38,46 +38,48 @@ check_or_create_configuration() {
 }
 
 # 根據參數選擇專案
-case ${1} in
-  "mh-letron")
-        echo "Your choice is mh-letron"
-        PROJECT_ID=$PROJECT_LETRON
-        check_or_create_configuration mh-letron
-        gcloud config set project $PROJECT_LETRON
-        gcloud config configurations activate mh-letron
-        ;;
-  "mh-letron-uat")
-        echo "Your choice is mh-letron-UAT"
-        PROJECT_ID=$PROJECT_LETRON_UAT
-        check_or_create_configuration mh-letron-uat
-        gcloud config set project $PROJECT_LETRON_UAT
-        gcloud config configurations activate mh-letron-uat
-        ;;
-  "mh-other-sportcms-bbg")
-        echo "Your choice is mh-other-sportcms-bbg"
-        PROJECT_ID=$PROJECT_BBG
-        check_or_create_configuration mh-other-sportcms-bbg
-        gcloud config set project $PROJECT_BBG
-        gcloud config configurations activate mh-other-sportcms-bbg
-        ;;
-  "other-sportcms-kq5L")
+case ${1} in                             
+  "anb1166")
         echo "Your choice is anb1166"
-        PROJECT_ID=$PROJECT_ANB1166  # 僅設置 PROJECT_ID
         check_or_create_configuration anb1166
         gcloud config set project $PROJECT_ANB1166
         gcloud config configurations activate anb1166
         ;;
   "mh-aolong")
         echo "Your choice is mh-aolong"
-        PROJECT_ID=$PROJECT_AOLONG
+        check_or_create_configuration default
+        gcloud config set project $PROJECT_AOLONG
+        gcloud config configurations activate default
+        ;;
+  "mh-letron")
+        echo "Your choice is mh-letron"
+        check_or_create_configuration mh-letron
+        gcloud config set project $PROJECT_LETRON
+        gcloud config configurations activate mh-letron
+        ;;
+  "mh-letron-uat")
+        echo "Your choice is mh-letron-UAT"
+        check_or_create_configuration mh-letron-uat
+        gcloud config set project $PROJECT_LETRON_UAT
+        gcloud config configurations activate mh-letron-uat
+        ;;
+  "mh-other-sportcms-bbg")
+        echo "Your choice is mh-other-sportcms-bbg"
+        check_or_create_configuration mh-other-sportcms-bbg
+        gcloud config set project $PROJECT_BBG
+        gcloud config configurations activate mh-other-sportcms-bbg
         ;;
   "mh-vogue")
         echo "Your choice is mh-other-sportcms-vogue"
-        PROJECT_ID=$PROJECT_VOGUE
+        check_or_create_configuration mh-vogue
+        gcloud config set project $PROJECT_VOGUE
+        gcloud config configurations activate mh-vogue
         ;;
   "sportscms-hb")
         echo "Your choice is sportscms-hb"
-        PROJECT_ID=$PROJECT_SPORTSCMS_HB
+        check_or_create_configuration sportscms-hb
+        gcloud config set project $PROJECT_SPORTSCMS_HB
+        gcloud config configurations activate sportscms-hb
         ;;
   *)
         echo -e "$profiles_message"
@@ -85,24 +87,20 @@ case ${1} in
         ;;
 esac
 
-# 檢查集群參數並動態設置配置名稱
+# 列出該專案下的可用集群和區域，並將它們存儲到變量
+CLUSTERS_AND_ZONES=$(gcloud container clusters list --format="table(name, zone)" | tail -n +2)
+
+echo -e "\nAvailable Kubernetes clusters and zones in the selected project:"
+echo "$CLUSTERS_AND_ZONES"
+
+# 動態選擇 Kubernetes 集群
 if [ -n "$2" ] && [ -n "$3" ]; then
   CLUSTER_NAME=$2
   ZONE=$3
-
-  # 檢查並創建集群配置
-  check_or_create_configuration "$CLUSTER_NAME-$ZONE"
-  echo "Activating configuration $CLUSTER_NAME-$ZONE and setting project to $PROJECT_ID"
-  gcloud config configurations activate "$CLUSTER_NAME-$ZONE"
-  gcloud config set project "$PROJECT_ID"
-
-  # 切換到 Kubernetes 集群
   echo "Switching to Kubernetes cluster: $CLUSTER_NAME in zone: $ZONE"
-  gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project "$PROJECT_ID"
+  gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE
 else
   echo "Please provide the cluster name and zone!"
-  gcloud container clusters list --format="table(name, zone)" | tail -n +2
-
   echo -e "$profiles_message"
   exit 1
 fi
@@ -130,4 +128,5 @@ case ${4} in
         echo "No additional options selected."
         ;;
 esac
+
 

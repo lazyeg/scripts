@@ -1,8 +1,8 @@
 #!/bin/bash
 # Program:
-#   This script accepts project_name, cluster_name, zone, and other commands.
+#   This script only accepts the following parameters.
 # History:
-# 2015/07/17    VBird    First release
+# 2015/07/17	VBird	First release
 
 #!/bin/bash
 
@@ -28,7 +28,7 @@ profiles_message=$FONT_BOLD"Usage ${0} [project_name] [cluster_name] [zone] [lis
 check_or_create_configuration() {
     config_name=$1
     existing_config=$(gcloud config configurations list --format="value(name)" | grep -w $config_name)
-
+    
     if [ -z "$existing_config" ]; then
         echo "Configuration $config_name does not exist. Creating..."
         gcloud config configurations create $config_name
@@ -57,7 +57,7 @@ case ${1} in
         echo "Your choice is mh-other-sportcms-bbg"
         PROJECT_ID=$PROJECT_BBG
         check_or_create_configuration mh-other-sportcms-bbg
-        gcloud config set project $PROJECT_BBG
+        gcloud config set project $PROJECT_LETRON_UAT
         gcloud config configurations activate mh-other-sportcms-bbg
         ;;
   "other-sportcms-kq5L")
@@ -86,19 +86,18 @@ case ${1} in
 esac
 
 # 檢查集群參數並動態設置配置名稱
+CLUSTERS_AND_ZONES=$(gcloud container clusters list --format="table(name, zone)" | tail -n +2)
 if [ -n "$2" ] && [ -n "$3" ]; then
   CLUSTER_NAME=$2
   ZONE=$3
 
-  # 檢查並創建集群配置
-  check_or_create_configuration "$CLUSTER_NAME-$ZONE"
-  echo "Activating configuration $CLUSTER_NAME-$ZONE and setting project to $PROJECT_ID"
-  gcloud config configurations activate "$CLUSTER_NAME-$ZONE"
+  # 動態使用集群名稱作為配置名稱
+  check_or_create_configuration "$CLUSTER_NAME"
+  echo "Activating configuration $CLUSTER_NAME and setting project to $PROJECT_ID"
+  gcloud config configurations activate "$CLUSTER_NAME"
   gcloud config set project "$PROJECT_ID"
 
-  # 切換到 Kubernetes 集群
   echo "Switching to Kubernetes cluster: $CLUSTER_NAME in zone: $ZONE"
-  gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project "$PROJECT_ID"
 else
   echo "Please provide the cluster name and zone!"
   gcloud container clusters list --format="table(name, zone)" | tail -n +2
@@ -106,7 +105,6 @@ else
   echo -e "$profiles_message"
   exit 1
 fi
-
 # 顯示可用的 Kubernetes contexts
 case ${4} in
   "get-contexts")
@@ -130,4 +128,5 @@ case ${4} in
         echo "No additional options selected."
         ;;
 esac
+
 

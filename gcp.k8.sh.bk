@@ -1,0 +1,122 @@
+#!/bin/bash
+# Program:
+#	This script only accepts the flowing parameter: one, two or three.
+# History:
+# 2015/07/17	VBird	First release
+#PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+#export PATH
+#source font.cfg
+FONT_BOLD='\033[1m'
+FONT_BLINK='\033[5m'
+COLOR_HEADER='\033[95m'
+COLOR_OKBLUE='\033[94m'
+COLOR_OKGREEN='\033[92m'
+COLOR_WARNING='\033[93m'
+COLOR_FAIL='\033[91m'
+COLOR_END='\033[0m'
+
+Green='\033[0;32m'
+NC='\033[0m' # No Color
+
+echo -e  "${Green}This k8s both uat and prod program will print your selection !${NC}\n"
+profiles_message=$FONT_BOLD"Usage ${0} [ sit |  uat | uat-v2 | prod | prod-devops | prod-v2 | pri-v2 | p2sp | cdn-uat| cdn-prod |get-contexts |list | ssh | status ]"$COLOR_END
+
+
+case ${1} in                             # 現在使用，可以用上面兩行替換！
+
+  "sit")
+        echo "Your choice is sit and standard-cluster-1"
+        gcloud config configurations activate sit
+        gcloud container clusters get-credentials  --zone asia-east1-a standard-cluster-1
+        ;;
+  "uat")
+	echo "Your choice is uat and mlytics-uat-fcdn"
+	gcloud config configurations activate default
+	gcloud container clusters get-credentials --zone asia-east1-b mlytics-uat-fcdn
+	;;
+  "uat-v2")
+        echo "Your choice is uat and mlytics-micro-service-v2"
+        gcloud config configurations activate default
+	gcloud container clusters get-credentials --zone asia-east1 uat-micro-service	
+        kubectl config set-context --current --namespace=micro-v2
+        ;;
+  "uat-v2-infra")
+        echo "Your choice is uat and infra"
+        gcloud config configurations activate default
+        gcloud container clusters get-credentials --zone asia-east1 uat-micro-service
+        kubectl config set-context --current --namespace=infra
+        ;;
+  "prod")
+	echo "Your choice is prod and mlytics-prod-fcdn"
+	gcloud config configurations activate  prod
+	gcloud container clusters get-credentials --zone asia-east1-a mlytics-prod-fcdn
+	;;
+ "prod-infra")
+        echo "Your choice is prod and mlytics-prod-fcdn"
+        gcloud config configurations activate  prod
+        gcloud container clusters get-credentials --zone asia-east1-a mlytics-prod-fcdn
+	kubectl config set-context --current --namespace=infra
+        ;;
+  "prod-devops")
+	echo "Your choice is prod-devops and mlytics-prod-devops"
+	gcloud config configurations activate  prod
+	gcloud container clusters get-credentials --zone asia-east1-a mlytics-prod-devops
+	;;
+  "prod-v2")
+        echo "Your choice is prod-v2 and mlytics-micro-service-v2"
+        gcloud config configurations activate  prod
+        gcloud container clusters get-credentials --zone asia-east1 mlytics-micro-service-v2
+	kubectl config set-context --current --namespace=micro-v2
+        ;;
+  "pri-v2")
+        echo "Your choice is prod and mlytics-pri"
+        gcloud config configurations activate prod
+        gcloud container clusters get-credentials --zone asia-east1 mlytics-pri
+	kubectl config set-context --current --namespace=micro-v2
+	;;
+  "cdn-uat")
+        echo "Your choice is uat-cdn-aws "
+        kubectl config use-context  arn:aws:eks:ap-northeast-1:147997115496:cluster/uat-cdn-log-eks
+	;;
+  "cdn-prod")
+        echo "Your choice is prod-cdn-aws "
+        kubectl config use-context  arn:aws:eks:ap-northeast-1:241533128494:cluster/prod-cdn-log-eks
+	;;
+  "get-contexts")
+        echo "kubectl config get-contexts"
+	kubectl config get-contexts
+	;;
+  "p2sp")
+        echo "kubectl config use-context p2sp-prod-hk-cluster-default" 
+        kubectl config use-context p2sp-prod-hk-cluster-default
+        ;;
+  "list")
+	echo "Your choice is instance list "
+        gcloud compute instances list
+	;;
+  "ssh")
+	echo "Your choice is ssh"
+	#zoneid=$( gcloud compute instances list| grep $2 | awk -F " " '{print $2}')
+	zoneid=$(gcloud compute instances list --filter NAME=$2 | grep -v ZONE  | awk -F " " '{print $2}' )
+	#zoneid=$( gcloud compute instances list  --regexp $2 | grep -v ZONE  | awk -F " " '{print $2}' )
+        gcloud compute ssh $2 --zone $zoneid
+	;;
+  "status")
+	echo "Your choice is get config list"
+	gcloud config configurations list
+	;;
+  *)
+	echo -e "$profiles_message"
+	;;
+esac
+
+_k8s_contexts_completions()
+{
+  local cur opts
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  opts="sit uat uat-v2 uat-v2-infra prod prod-infra prod-devops prod-v2 pri-v2 p2sp cdn-uat cdn-prod get-contexts list ssh status"
+  COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+
+# 将补全功能与脚本关联
+complete -F _k8s_contexts_completions  g8
