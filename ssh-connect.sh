@@ -9,7 +9,7 @@
 ### 
 
 # 默認使用者名稱，可以根據需要修改
-USER=${USER:-devops}
+USER=${USER:-michael.hung}
 
 # 檢查是否傳入了IP地址
 if [ $# -lt 1 ]; then
@@ -19,3 +19,5 @@ fi
 
 IP=$1
 
+# 執行 SSH 連接
+ssh -i ~/.ssh/michael.hung.sshkey "$USER@$IP"

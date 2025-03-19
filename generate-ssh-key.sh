@@ -15,7 +15,7 @@ if [ -z "$1" ]; then
 fi
 
 KEY_NAME=$1
-KEY_PATH=~/Downloads/ssh/$KEY_NAME
+KEY_PATH=~/.ssh/$KEY_NAME
 
 # 檢查密鑰是否已經存在
 if [ -f "$KEY_PATH" ]; then
