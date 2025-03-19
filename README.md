@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-03-18 11:38:28
  * @LastEditors: michael.hung michael.hung@michaelhungdeMacBook-Pro.local
- * @LastEditTime: 2025-03-18 13:09:30
+ * @LastEditTime: 2025-03-19 17:55:10
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -129,5 +129,46 @@ function set_gcp_project_cluster() {
     gcloud container clusters get-credentials $GCP_CLUSTER_NAME --zone $GCP_ZONE --project $GCP_PROJECT_ID
     echo "Switched to project $GCP_PROJECT_ID and cluster $GCP_CLUSTER_NAME"
 }
+```
+# SSH Scripts
+
+這些腳本提供了簡單的 SSH 連接和 SSH 密鑰生成的功能，適用於多個平台，並可用於管理遠程伺服器。
+
+## 文件結構
+
+
+
+### 說明：
+1. **腳本解釋**：在 `README.md` 中加入了 `ssh-connect.sh` 腳本的詳細內容和解釋。
+2. **使用方法**：描述了如何使用腳本並提供了具體的命令範例。
+3. **簡化配置**：介紹了如何將別名配置到 `.bashrc` 或 `.zshrc` 中，以簡化腳本使用。
+4. **注意事項**：提到一些使用腳本的常見注意事項，確保使用者順利運行。
+
+
+
+## 功能
+
+**生成 SSH 密鑰對**：這個腳本會生成一對 RSA 4096 位的 SSH 密鑰對，並將私鑰和公鑰保存在指定位置。
+
+
+### 使用方法
+
+```bash
+
+~/lab/data/7-env/scripts/generate-ssh-key.sh <key_name>
+
+```
+
+
+**ssh-connect.sh 腳本可以用來通過 SSH 連接到遠程伺服器。腳本的內容如下**：
+
+```bash
+~/lab/data/7-env/scripts/ssh-connect.sh
+```
+### 使用方法
+```bash
+ss <ip_address
+```
+
 
 
