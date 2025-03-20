@@ -3,12 +3,12 @@
  # @Author: michael.hung michael.hung@michaelhungdeMacBook-Pro.local
  # @Date: 2025-03-19 17:33:51
  # @LastEditors: michael.hung michael.hung@michaelhungdeMacBook-Pro.local
- # @LastEditTime: 2025-03-19 17:34:05
+ # @LastEditTime: 2025-03-20 09:38:18
  # @FilePath: /gcp/generate-ssh-key.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
 
-# 檢查是否指定了 SSH 密鑰的存儲位置
+# 檢查是否指定了 SSH 密鑰的存儲位置 記得 key name 加 .sshkey
 if [ -z "$1" ]; then
   echo "Usage: $0 <key_name>"
   exit 1
