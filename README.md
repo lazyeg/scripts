@@ -2,10 +2,18 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-03-18 11:38:28
  * @LastEditors: michael.hung michael.hung@michaelhungdeMacBook-Pro.local
- * @LastEditTime: 2025-03-20 11:05:41
+ * @LastEditTime: 2025-03-20 11:25:07
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
+## 目录
+1. [安装与配置 Bash、Git 和 Kubectl 自动补全](#安装与配置-bashgit-和-kubectl-自动补全)
+2. [GCP Kubernetes 集群管理脚本](#gcp-kubernetes-集群管理脚本)
+3. [使用 `.bashrc` 和 `.bash_profile` 配置 GCP 和 Kubernetes](#使用-bashrc-和-bash_profile-配置-gcp-和-kubernetes)
+4. [Github 仓库 "Scripts"](##github-仓库-scripts)
+5. [SSH 脚本](#ssh-脚本)
+
+---
 
 # Setup Instructions for Kubectl and Google Cloud SDK with Bash Completion
 
