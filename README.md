@@ -2,20 +2,20 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-03-18 11:38:28
  * @LastEditors: michael.hung michael.hung@michaelhungdeMacBook-Pro.local
- * @LastEditTime: 2025-03-20 11:25:07
+ * @LastEditTime: 2025-03-20 11:35:26
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 ## 目录
-1. [安装与配置 Bash、Git 和 Kubectl 自动补全](#安装与配置-bashgit-和-kubectl-自动补全)
+1. [安装与配置 Bash、Git 和 Kubectl 自动补全](#安裝与配置-bash-git-和-kubectl-自動補全)
 2. [GCP Kubernetes 集群管理脚本](#gcp-kubernetes-集群管理脚本)
 3. [使用 `.bashrc` 和 `.bash_profile` 配置 GCP 和 Kubernetes](#使用-bashrc-和-bash_profile-配置-gcp-和-kubernetes)
-4. [Github 仓库 "Scripts"](##github-仓库-scripts)
+4. [Github Repo "Scripts"](#github-repo-scripts)
 5. [SSH 脚本](#ssh-脚本)
 
 ---
-
-# Setup Instructions for Kubectl and Google Cloud SDK with Bash Completion
+# 安裝与配置 bash git 和 kubectl 自動補全
+## Setup Instructions for Kubectl and Google Cloud SDK with Bash Completion
 
 ### Steps to Install and Configure Bash, Git, and Kubectl Auto-Completion with Google Cloud SDK
 
@@ -110,8 +110,8 @@
    ```
 
    If everything is configured correctly, you should see the auto-completion options for `kubectl`.
-
-# GCP Kubernetes Cluster Management Script
+# GCP Kubernetes 集群管理脚本
+## GCP Kubernetes Cluster Management Script
 
 This script helps you manage and interact with Kubernetes clusters on Google Cloud Platform (GCP). It allows you to set the project, select the cluster, configure `gcloud` settings, and perform various operations such as listing instances or accessing Kubernetes contexts.
 
@@ -139,8 +139,7 @@ Also, ensure that your Google Cloud project is set up with the necessary IAM per
 ```bash
 ./gcp.k8.sh [project_name] [cluster_name] [zone] [list | get-contexts | ssh | status]
 ```
-
-# Using `.bashrc` and `.bash_profile` for GCP and Kubernetes Configuration
+# 使用 .bashrc 和 .bash_profile 配置 GCP 和 Kubernetes
 
 To streamline working with Google Cloud and Kubernetes, all you need are the `.bashrc` and `.bash_profile` files. These files allow you to set environment variables, aliases, and functions that make managing GCP and Kubernetes easier.
 
