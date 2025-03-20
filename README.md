@@ -6,7 +6,7 @@
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
-## 目录
+## 目錄
 1. [安装与配置 Bash、Git 和 Kubectl 自动补全](#安裝与配置-bash-git-和-kubectl-自動補全)
 2. [GCP Kubernetes 集群管理脚本](#gcp-kubernetes-集群管理脚本)
 3. [使用 `.bashrc` 和 `.bash_profile` 配置 GCP 和 Kubernetes](#使用-bashrc-和-bash_profile-配置-gcp-和-kubernetes)
