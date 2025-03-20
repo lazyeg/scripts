@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-03-18 11:38:28
  * @LastEditors: michael.hung hon0612@gmail.com
- * @LastEditTime: 2025-03-20 13:39:08
+ * @LastEditTime: 2025-03-20 13:52:36
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -38,16 +38,22 @@
 
    Since `kubectl` is installed via the Google Cloud SDK located at `/Users/michael.hung/google-cloud-sdk/bin/kubectl`, you need to source the completion script for Google Cloud SDK.
 
+   Set as home directory
+
+   ```
+   ~/
+   ```
+
    Download Google Cloud SDK
 
    ```bash
    wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz
    ```
+   Install Google Cloud SDK
 
-   Set as home directory
-
-   ```
-   ~/
+   ```bash
+   tar -zxvf google-cloud-cli-darwin-arm.tar.gz 
+   ./google-cloud-sdk/install.sh
    ```
 
    Add the following line to your `~/.bash_profile` to enable completion for Google Cloud SDK:
@@ -125,11 +131,6 @@
   - List available Kubernetes contexts.
   - SSH into instances.
   - Check the status of GCP configurations.
-## Usage
-
-### General Command Format
-
-
 
 ## 安裝與使用
 
