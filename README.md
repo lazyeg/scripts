@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-03-18 11:38:28
  * @LastEditors: michael.hung hon0612@gmail.com
- * @LastEditTime: 2025-03-20 17:36:05
+ * @LastEditTime: 2025-04-02 17:34:40
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -125,6 +125,7 @@
 - `generate-ssh-key.sh`: 生成 SSH 金鑰的腳本
 - `ssh-connect.sh`: 簡化 SSH 連接的腳本
 - `install-bash-config.sh`: 安裝和配置腳本
+- `install-mac-config.sh`: mac 安裝腳本
 - `gcp.k8.sh`: GCP Kubernetes 集群管理脚本
   - Set GCP project and activate configurations.
   - Switch between Kubernetes clusters.
@@ -196,6 +197,15 @@
 - 將 repo 中的 .bashrc 和 .bash_profile 透過軟連結設置到 ~/
 - 為所有 .sh 腳本設置執行權限
 - 重新載入 bash 配置
+
+### install-mac-config.sh 腳本功能 
+
+- 安裝 Homebrew（若未安裝）
+- 安裝 Bash、Git、bash-completion 和 docker-completion
+- 安裝並配置 Google Cloud SDK，包括 kubectl 和 gke-gcloud-auth-plugin
+- 設定 GKE 認證插件
+- 更新系統 shell 為新版 Bash
+- 啟用自動補全功能
 
 ### generate-ssh-key.sh 腳本功能
 - 這個腳本會生成一對 RSA 4096 位的 SSH 密鑰對，並將私鑰和公鑰保存在指定位置
