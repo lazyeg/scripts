@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-03-18 11:38:28
  * @LastEditors: michael.hung hon0612@gmail.com
- * @LastEditTime: 2025-04-14 10:00:39
+ * @LastEditTime: 2025-04-14 10:08:05
  * @FilePath: /gcp/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -132,6 +132,7 @@
   - List available Kubernetes contexts.
   - SSH into instances.
   - Check the status of GCP configurations.
+- `k8s_simple_backup.sh`: 精簡版 Kubernetes 備份腳本（只備份 ingress/configmap/secret/deployment 等資源，排除系統 namespace 與 `.status` 欄位
 
 ## 安裝與使用
 
@@ -215,11 +216,11 @@
 - 腳本可以用來通過 SSH 連接到遠程伺服器
 - 默認使用者名稱，可以根據需要修改 `USER=${USER:-michael.hung}`
 - 搭配 `generate-ssh-key.sh` 使用
-# Kubernetes 簡易備份腳本
+### k8s_simple_backup.sh Kubernetes 簡易備份腳本
 
 這個備份腳本用於備份指定 Kubernetes 資源（不包含 status），並排除系統用的 Namespace。目的是快速保存應用部署相關設定，方便日後還原或移植。
 
-## 🧾 備份內容
+#### 🧾 備份內容
 
 - Resource 類型：
   - `ingress`
@@ -235,7 +236,7 @@
 - 所有備份內容皆會去除 `.status` 欄位
 - 額外備份整個 Cluster 的 CRD（CustomResourceDefinition）
 
-## 🧰 使用方式
+#### 🧰 使用方式
 
 ```bash
 chmod +x k8s_simple_backup.sh
