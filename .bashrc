@@ -145,7 +145,9 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 if [ -f ~/.npm.env ]; then
   source ~/.npm.env
 fi
-
+if [ -f ~/.ginpm.env ]; then
+  source ~/.ginpm.env
+fi
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
