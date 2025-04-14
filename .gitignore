@@ -2,3 +2,9 @@
 .DS_Store
 ## Add k8s0*
 k8s-simple-backup-*
+## Add release
+release.config.js
+package.json
+package-lock.json
+## Add
+node_modules
