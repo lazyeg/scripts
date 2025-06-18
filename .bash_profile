@@ -46,3 +46,7 @@ if [ -f '/Users/michael.hung/google-cloud-sdk/completion.bash.inc' ]; then . '/U
 source /Users/michael.hung/google-cloud-sdk/completion.bash.inc
 
 complete -C /opt/homebrew/bin/terraform terraform
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/Cellar/openjdk@11/11.0.27"
+export PATH="$JAVA_HOME/bin:$PATH"
+
