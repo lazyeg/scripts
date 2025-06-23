@@ -116,6 +116,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias ansible29="source ~/.ansible-2.9-env-py38/bin/activate"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias k=kubectl
