@@ -202,3 +202,6 @@ _kns_complete() {
 
 # 绑定 kns 别名的自动补全函数
 complete -F _kns_complete kns
+# 只有當前不在 screen 裡時才自動進入
+alias awsprod='export AWS_PROFILE=prod && echo "Switched to AWS prod profile"'
+alias awsuat='export AWS_PROFILE=uat && echo "Switched to AWS uat profile"'
